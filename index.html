@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- tailwind -->
+    <link href="./output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- tailwind -->
+    <!-- RemixIcons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+      integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- RemixIcons -->
+    <style>
+      .Container-2 {
+        width: 100%;
+        height: 100vh;
+      }
+      .sidebarBigHd {
+        width: 0px;
+      }
+      .Container-2Hd {
+        width: 100%;
+      }
+      :root {
+        --background: whitesmoke;
+        --background-widget: #1f1f1f;
+        --primary: coral;
+      }
+
+      .widget {
+        border-radius: 0.75rem;
+        background-color: var(--background-widget);
+        padding: 1rem;
+        max-width: 40rem;
+        width: 100%;
+        min-width: 20rem;
+      }
+
+      .widget canvas {
+        min-height: 20rem;
+      }
+
+      #axes-example-1 {
+        height: 200px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    </style>
+
+    <!-- chart -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="Container flex w-100 h-auto">
+      <div
+        class="sidebar w-auto fixed z-10 h-[100vh] px-[20px] bg-[#1f1f1f] flex pt-[20px] pb-[30px] border-r border-[#373737]"
+      >
+        <div
+          class="sidebarSmall flex flex-col justify-between items-center text-white text-[20px]"
+        >
+          <img src="./Assets/logo-icon.svg" class="w-[30px]" />
+          <i class="ri-timer-2-line text-[#6A69F5]"></i>
+          <i class="ri-apps-2-line"></i>
+          <i class="ri-box-3-line"></i>
+          <i class="ri-flashlight-line"></i>
+          <i class="ri-pie-chart-line"></i>
+          <i class="ri-at-fill"></i>
+          <i class="ri-drag-move-line"></i>
+          <i class="ri-file-chart-line"></i>
+          <i class="ri-table-line"></i>
+          <i class="ri-user-line"></i>
+          <i class="ri-pages-line"></i>
+          <i class="ri-layout-3-line"></i>
+          <i class="ri-git-repository-private-line"></i>
+          <i class="ri-list-check"></i>
+          <i class="ri-article-line"></i>
+        </div>
+        <!-- <div class="sidebarBig w-[200px] h-100 flex flex-col gap-5">
+        <div class=" w-100 flex items-center justify-center"><img  src="./Assets/logo-light (1).svg" alt=""></div>
+        <div class="acc w-100 h-auto flex flex-col">
+          <h2 class="text-[#5a5858] text-[14px] font-semibold">Menu</h2>
+          <div class="w-100 flex items-center justify-between text-white">
+            <div>  <i class="ri-dashboard-3-line"></i> Dashboard </div>
+            <i class="ri-arrow-drop-down-line text-[25px]"></i>
+          </div>
+        </div>
+       </div> -->
+      </div>
+
+      <div class="Container-2 w-[100%] ms-[70px] h-auto relative right-0 bg-[#151515] flex flex-col"
+      >
+        <div
+          class="navbar sticky right-0 h-[60px] w-100 bg-[#1f1f1f] text-[#706e6e] border-b border-[#373737] flex justify-between items-center"
+        >
+          <div
+            class="navLeft w-auto flex items-center gap-2 text-white ps-[10px]"
+          >
+            <i class="ri-menu-2-line text-[24px]"></i>
+            <div
+              class="searchbarAtNav hidden w-[350px] h-[40px] border border-[#373737] rounded-[3px] bg-[#151515] md:flex items-center justify-between px-[1vw]"
+            >
+              <input
+                class="outline-none bg-transparent w-[300px] placeholder:text-[#706e6e] placeholder:text-[15px] text-[#cfcece] text-[15px]"
+                type="text"
+                placeholder="Search..."
+              />
+              <i class="ri-search-line text-[#cfcece]"></i>
+            </div>
+          </div>
+          <div class="navRight flex items-center text-white gap-3 text-[20px]">
+            <i class="ri-fullscreen-line"></i>
+            <i class="ri-sun-line"></i>
+            <i class="ri-notification-3-line"></i>
+            <div class="userProfile flex items-center gap-2">
+              <img
+                class="w-[30px] h-[30px] rounded-[50%]"
+                src="./Assets/user (1).png"
+              />
+              <p class="text-[15px] flex items-center gap-1">
+                Stevens L.<i
+                  class="ri-arrow-drop-down-line text-[35px] text-[#cfcece]"
+                ></i>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          id="droplist"
+          class="droplist w-[180px] h-[200px] absolute right-[25px] top-[60px] flex flex-col items-start justify-between px-[10px] py-[10px] text-[#5d5d5d] bg-[#1f1f1f]"
+        >
+          <p><i class="ri-user-line"></i> Profile</p>
+          <p><i class="ri-equalizer-line"></i> Settings</p>
+          <p><i class="ri-question-answer-line"></i> Messages</p>
+          <p><i class="ri-customer-service-2-line"></i> Support</p>
+          <div
+            class="Hline w-[110%] mx-[-10px] border border-t border-[#313030]"
+          ></div>
+          <p class="text-white">
+            <i class="ri-logout-circle-r-line"></i> Log Out
+          </p>
+        </div>
+        <div class="Container-3 w-[100%] h-auto bg-[#151515] p-[15px] flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <h4 class="font-extralight text-[#ffffff] text-[12px]">Sliced</h4>
+
+            <h2 class="text-white text-[20px] font-bold">Dashboard</h2>
+          </div>
+          <!-- first row -->
+          <div
+            class="w-100 h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            <div
+              class="bg-[#1f1f1f] border border-[#282827] rounded-md flex p-[25px]"
+            >
+              <div class="w-[40%] flex flex-col justify-between">
+                <p class="text-[16px] font-normal text-[white]">Total views</p>
+                <div class="flex justify-between w-[90%] h-100 items-center">
+                  <h1 class="text-[24px] text-[#fffc] font-bold">15102</h1>
+
+                  <div
+                    class="w-[36px] h-[22px] px-[2px] text-[14px] font-bold rounded-lg flex justify-center items-center bg-[#2a4234] text-[#58b580]"
+                  >
+                    23%
+                  </div>
+                </div>
+
+                <p class="text-[14px] text-[#94989a] font-normal">
+                  Current Month
+                </p>
+              </div>
+              <div class="w-[60%] flex items-center">
+                <img src="./Assets/green graph.png" alt="" />
+              </div>
+            </div>
+
+            <div
+              class="bg-[#1f1f1f] border border-[#282827] rounded-md flex p-[25px]"
+            >
+              <div class="w-[40%] flex flex-col justify-between">
+                <p class="text-[16px] font-normal text-[white]">Paid Visits</p>
+                <div class="flex justify-between w-[90%] h-100 items-center">
+                  <h1 class="text-[24px] text-[#fffc] font-bold">4581</h1>
+                  <div
+                    class="w-[36px] h-[22px] px-[2px] text-[14px] font-bold rounded-lg flex justify-center items-center bg-[#412930] text-[#d1435f]"
+                  >
+                    24%
+                  </div>
+                </div>
+                <p class="text-[14px] text-[#94989a] font-normal">
+                  Current Month
+                </p>
+              </div>
+              <div class="w-[60%] flex items-center">
+                <img src="./Assets/red graph.png" alt="" />
+              </div>
+            </div>
+
+            <div
+              class="bg-[#1f1f1f] border border-[#282827] rounded-md flex p-[25px]"
+            >
+              <div class="w-[40%] flex flex-col justify-between">
+                <p class="text-[16px] font-normal text-[white]">
+                  Total Referral
+                </p>
+                <div class="flex justify-between w-[90%] h-100 items-center">
+                  <h1 class="text-[24px] text-[#fffc] font-bold">2140</h1>
+                  <div
+                    class="w-[36px] h-[22px] px-[2px] text-[14px] font-bold rounded-lg flex justify-center items-center bg-[#412930] text-[#d1435f]"
+                  >
+                    10%
+                  </div>
+                </div>
+                <p class="text-[14px] text-[#94989a] font-normal">
+                  Current Month
+                </p>
+              </div>
+              <div class="w-[60%] flex items-center">
+                <img src="./Assets/red graph.png" alt="" />
+              </div>
+            </div>
+
+            <div
+              class="bg-[#1f1f1f] border border-[#282827] rounded-md flex p-[25px]"
+            >
+              <div class="w-[40%] flex flex-col justify-between">
+                <p class="text-[16px] font-normal text-[white]">This Week</p>
+                <div class="flex justify-between w-[90%] h-100 items-center">
+                  <h1 class="text-[24px] text-[#fffc] font-bold">7714</h1>
+                  <div
+                    class="w-[36px] h-[22px] px-[2px] text-[14px] font-bold rounded-lg flex justify-center items-center bg-[#2a4234] text-[#58b580]"
+                  >
+                    82%
+                  </div>
+                </div>
+                <p class="text-[14px] text-[#94989a] font-normal">
+                  Current Month
+                </p>
+              </div>
+              <div class="w-[60%] flex items-center">
+                <img src="./Assets/green graph.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <!-- Second row -->
+          <div class="w-100 grid grid-cols-1 xl:grid-cols-2 gap-4">
+            <div
+              class="w-[100%] h-[401px] bg-[#1f1f1f] border border-[#282827] rounded-md flex"
+            >
+              <div class="widget w-100 h-100">
+                <canvas id="chart"></canvas>
+              </div>
+            </div>
+
+            <div class="w-[100%] grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                class="w-[100%] h-[401px] bg-[#1f1f1f] border border-[#282827] rounded-md flex"
+              >
+                <div class="container mx-auto text-white">
+                  <div class="p-6 rounded-lg">
+                    <h1 class="text-2xl font-semibold mb-4">
+                      Top Traffic By Source
+                    </h1>
+                    <div class="space-y-4">
+                      <!-- Chrome -->
+                      <div class="flex items-center space-x-4">
+                        <div
+                          class="flex-shrink-0 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center"
+                        >
+                          <!-- Icon can be added here -->
+                          <i class="ri-chrome-line"></i>
+                        </div>
+                        <div class="flex-1">
+                          <div class="flex justify-between">
+                            <span class="font-medium">Chrome</span>
+                            <span class="text-purple-500">56%</span>
+                          </div>
+                          <div class="h-2 bg-gray-700 rounded-full mt-1">
+                            <div
+                              class="h-full bg-purple-500 rounded-full"
+                              style="width: 56%"
+                            ></div>
+                          </div>
+                          <span class="text-gray-400 text-sm">Top Browser</span>
+                        </div>
+                      </div>
+                      <!-- Safari -->
+                      <div class="flex items-center space-x-4">
+                        <div
+                          class="flex-shrink-0 w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center"
+                        >
+                          <!-- Icon can be added here -->
+                          <i class="ri-safari-line"></i>
+                        </div>
+                        <div class="flex-1">
+                          <div class="flex justify-between">
+                            <span class="font-medium">Safari</span>
+                            <span class="text-white">86%</span>
+                          </div>
+                          <div class="h-2 bg-gray-700 rounded-full mt-1">
+                            <div
+                              class="h-full bg-white rounded-full"
+                              style="width: 86%"
+                            ></div>
+                          </div>
+                          <span class="text-gray-400 text-sm">Top Browser</span>
+                        </div>
+                      </div>
+                      <!-- Firefox -->
+                      <div class="flex items-center space-x-4">
+                        <div
+                          class="flex-shrink-0 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center"
+                        >
+                          <!-- Icon can be added here -->
+                          <i class="ri-firefox-line"></i>
+                        </div>
+                        <div class="flex-1">
+                          <div class="flex justify-between">
+                            <span class="font-medium">Firefox</span>
+                            <span class="text-red-500">65%</span>
+                          </div>
+                          <div class="h-2 bg-gray-700 rounded-full mt-1">
+                            <div
+                              class="h-full bg-red-500 rounded-full"
+                              style="width: 65%"
+                            ></div>
+                          </div>
+                          <span class="text-gray-400 text-sm">Top Browser</span>
+                        </div>
+                      </div>
+                      <!-- Edge -->
+                      <div class="flex items-center space-x-4">
+                        <div
+                          class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center"
+                        >
+                          <!-- Icon can be added here -->
+                          <i class="ri-edge-new-line"></i>
+                        </div>
+                        <div class="flex-1">
+                          <div class="flex justify-between">
+                            <span class="font-medium">Edge</span>
+                            <span class="text-blue-500">40%</span>
+                          </div>
+                          <div class="h-2 bg-gray-700 rounded-full mt-1">
+                            <div
+                              class="h-full bg-blue-500 rounded-full"
+                              style="width: 40%"
+                            ></div>
+                          </div>
+                          <span class="text-gray-400 text-sm">Top Browser</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-[100%] h-[401px] bg-[#1f1f1f] border border-[#282827] rounded-md flex flex-col p-6 justify-center"
+              >
+                <h1 class="text-white text-[24px] font-semibold">
+                  User By Device
+                </h1>
+                <img src="./Assets/pie.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <!-- Third row -->
+          <div
+            class="w-[100%] grid grid-cols-1 md:grid-cols-2 gap-4 text-white"
+          >
+            <div class="w-100 h-auto bg-[#1f1f1f]">
+              <div class="container mx-auto mt-10">
+                <div class="bg-[#1f1f1f] p-6 rounded-lg">
+                  <h1 class="text-2xl font-semibold mb-4">
+                    Top Performing Pages
+                  </h1>
+                  <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                      <thead>
+                        <tr
+                          class="bg-[1f1f1f] text-left text-sm font-semibold uppercase tracking-wider"
+                        >
+                          <th class="px-4 py-2">Page Name</th>
+                          <th class="px-4 py-2">Clicks</th>
+                          <th class="px-4 py-2">Sessions</th>
+                          <th class="px-4 py-2">% Change</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <a
+                              href="http://sliced.com/Index.html"
+                              class="text-white hover:underline"
+                              >http://sliced.com/Index.html</a
+                            >
+                          </td>
+                          <td class="px-4 py-2">55</td>
+                          <td class="px-4 py-2">2952</td>
+                          <td class="px-4 py-2 text-white">
+                            27% <span class="text-green-400">3.8%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <a
+                              href="http://google.com"
+                              class="text-white hover:underline"
+                              >http://google.com</a
+                            >
+                          </td>
+                          <td class="px-4 py-2">229</td>
+                          <td class="px-4 py-2">2392</td>
+                          <td class="px-4 py-2 text-white">
+                            65% <span class="text-green-400">7.9%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <a
+                              href="http://facebook.com/Index.html"
+                              class="text-white hover:underline"
+                              >http://facebook.com/Index.html</a
+                            >
+                          </td>
+                          <td class="px-4 py-2">12</td>
+                          <td class="px-4 py-2">2792</td>
+                          <td class="px-4 py-2 text-white">
+                            37% <span class="text-red-400">19.8%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <a
+                              href="http://twitter.com"
+                              class="text-white hover:underline"
+                              >http://twitter.com</a
+                            >
+                          </td>
+                          <td class="px-4 py-2">239</td>
+                          <td class="px-4 py-2">6534</td>
+                          <td class="px-4 py-2 text-white">
+                            74% <span class="text-red-400">23.3%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <a
+                              href="http://github.com/Index.html"
+                              class="text-white hover:underline"
+                              >http://github.com/Index.html</a
+                            >
+                          </td>
+                          <td class="px-4 py-2">53</td>
+                          <td class="px-4 py-2">3434</td>
+                          <td class="px-4 py-2 text-white">
+                            71% <span class="text-green-400">46.2%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <a
+                              href="http://instagram.com"
+                              class="text-white hover:underline"
+                              >http://instagram.com</a
+                            >
+                          </td>
+                          <td class="px-4 py-2">65</td>
+                          <td class="px-4 py-2">123</td>
+                          <td class="px-4 py-2 text-white">
+                            69% <span class="text-red-400">6.89%</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-100 h-auto bg-[#1f1f1f]">
+              <div class="container mx-auto mt-10">
+                <div class="bg-[#1f1f1f] p-6 rounded-lg">
+                  <h1 class="text-2xl font-semibold mb-4">User By Countries</h1>
+                  <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                      <thead>
+                        <tr
+                          class="bg-[1f1f1f] text-left text-sm font-semibold uppercase tracking-wider"
+                        >
+                          <th class="px-4 py-2">Country Name</th>
+                          <th class="px-4 py-2">Device</th>
+                          <th class="px-4 py-2">Age</th>
+                          <th class="px-4 py-2">Sessions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <p>United States</p>
+                          </td>
+                          <td class="px-4 py-2">Mobile</td>
+                          <td class="px-4 py-2">24-36</td>
+                          <td class="px-4 py-2 text-white">
+                            879 <span class="text-green-400">7.8%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <p>Germany</p>
+                          </td>
+                          <td class="px-4 py-2">Tabblet</td>
+                          <td class="px-4 py-2">50</td>
+                          <td class="px-4 py-2 text-white">
+                            340 <span class="text-red-600">19.8%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <p>United Kingdom</p>
+                          </td>
+                          <td class="px-4 py-2">Desktop</td>
+                          <td class="px-4 py-2">24-36</td>
+                          <td class="px-4 py-2 text-white">
+                            5.4k <span class="text-red-600">23.3%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <p>India</p>
+                          </td>
+                          <td class="px-4 py-2">Tablet</td>
+                          <td class="px-4 py-2">18</td>
+                          <td class="px-4 py-2 text-white">
+                            1.3k <span class="text-green-400">46.2%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <p>Singapore</p>
+                          </td>
+                          <td class="px-4 py-2">Mobile</td>
+                          <td class="px-4 py-2">18-24</td>
+                          <td class="px-4 py-2 text-white">
+                            699k <span class="text-red-600">6.8%</span>
+                          </td>
+                        </tr>
+                        <tr class="bg-[#1f1f1f] border-b border-gray-700">
+                          <td class="px-4 py-2">
+                            <p>Ireland</p>
+                          </td>
+                          <td class="px-4 py-2">Desktop</td>
+                          <td class="px-4 py-2">18</td>
+                          <td class="px-4 py-2 text-white">
+                            2.3k <span class="text-green-400">3.8%</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-[14px] text-[#727272a5]"><p>© 2024 Sliced</p></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- jQ cdn -->
+  <script src="jquery-3.7.1.min.js"></script>
+  <!-- jq code -->
+  <script>
+    $(document).ready(function () {
+      $(".droplist").hide();
+      $(".userProfile").click(function () {
+        $(".droplist").fadeToggle(200);
+      });
+
+      $(".ri-menu-2-line").click(function () {
+        $(".Container-2").toggleClass("Container-2Hd");
+        $(".sidebarBig").toggleClass("sidebarBigHd");
+      });
+
+      $(document).click(function (ev) {
+        if (!$(ev.target).closest(".droplist , .userProfile").length) {
+          $(".droplist").hide();
+        }
+      });
+    });
+  </script>
+  <!-- for charts -->
+  <script>
+    const ctx = document.getElementById("chart");
+
+    Chart.defaults.color = "#ffffff";
+    // Chart.defaults.font.family = "Poppins";
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
+        datasets: [
+          {
+            label: "Monthly Income",
+            data: [
+              2235, 3250, 1890, 5400, 20240, 6254, 12325, 4856, 10325, 2254,
+              22356, 8486,
+            ],
+            backgroundColor: "black",
+            borderColor: "#6060bf",
+            borderRadius: 6,
+            cubicInterpolationMode: "monotone",
+            fill: false,
+            borderSkipped: false,
+          },
+        ],
+      },
+      options: {
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        elements: {
+          point: {
+            radius: 0,
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: "Yearly Income",
+            padding: { bottom: 24 },
+            font: {
+              size: 16,
+              weight: "normal",
+            },
+          },
+          tooltip: {
+            backgroundColor: "orange",
+            bodyColor: "#272626",
+            yAlign: "bottom",
+            cornerRadius: 4,
+            titleColor: "#272626",
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                if (context.parsed.y !== null) {
+                  const label = new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(context.parsed.y);
+                  return label;
+                }
+                return null;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            border: {
+              dash: [4, 4],
+            },
+            title: {
+              text: "2023",
+            },
+          },
+          y: {
+            grid: {
+              color: "#27292D",
+            },
+            border: {
+              dash: [1, 2],
+            },
+
+            title: {
+              display: true,
+              text: "Income [USD]",
+              padding: { bottom: 16 },
+            },
+          },
+        },
+      },
+    });
+
+    // Inspired by chart widget created by @davidm_ml
+  </script>
+</html>
